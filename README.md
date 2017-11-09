@@ -1,8 +1,7 @@
 # im
 
-> webim weith huanxin sdk
+> webim weith Huanxin sdk
 
-This is a webIM with Huanxin SDK.The Frontend use vue+vue-router+element-ui.
 ## Build Setup
 
 ``` bash
@@ -14,5 +13,7 @@ npm run dev
 
 # build for production with minification
 npm run build
+```
+
 
 
