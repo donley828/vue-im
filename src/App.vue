@@ -1,8 +1,11 @@
 <template>
-  <div id="app">
-    <img src="./assets/logo.png">
-    <router-view/>
-  </div>
+  <el-container>
+    <el-main>
+      <div>
+        <router-view></router-view>
+      </div>
+    </el-main>
+  </el-container>
 </template>
 
 <script>
@@ -12,12 +15,21 @@ export default {
 </script>
 
 <style>
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
-  -webkit-font-smoothing: antialiased;
-  -moz-osx-font-smoothing: grayscale;
+body,
+html {
+  height: 100%;
+}
+* {
+  margin: 0;
+  padding: 0;
+}
+.el-container {
+  height: 100%;
+  background-image: url('./assets/14284041271_314bca5a9a_o-e1502649826956.jpg');
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  align-items: center;
+}
+.el-main {
+  margin: 0 auto;
 }
 </style>
