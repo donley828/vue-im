@@ -1,5 +1,6 @@
 <template>
   <el-main>
+    <h1>注册账号</h1>
     <el-form ref="userinfo" :model="userinfo" status-icon :rules="ruleform" class="demo-ruleForm" label-width="80px">
       <el-form-item label="用户名" prop="username" required>
         <el-input v-model="userinfo.username" placeholder="请输入用户名"></el-input>
@@ -71,11 +72,19 @@ export default {
         password: formName.password,
         nickname: formName.nickname,
         appKey: this.$WebIM.config.appkey,
-        success: function() {
+        success() {
           _this.$message('注册成功！')
+          setTimeout(() => {
+            _this.$router.push('Signin')
+          }, 1000)
         },
-        error: function(err) {
-          console.log(err)
+        error(err) {
+          if (err.type === 17) {
+            _this.$message({
+              message: '用户名已存在',
+              type: 'warning'
+            })
+          }
         },
         apiUrl: this.$WebIM.config.apiURL
       }
@@ -88,14 +97,21 @@ export default {
 }
 </script>
 <style scoped>
+h1,
+h2 {
+  font-weight: normal;
+}
+.el-form {
+  margin-top: 20px;
+}
 .el-main {
-  width: 400px;
+  flex: 0.4;
   background-color: #edf2fc;
   border-radius: 10px;
 }
 @media screen and (max-width: 600px) {
   .el-main {
-    width: 100%;
+    flex: 1;
   }
 }
 </style>

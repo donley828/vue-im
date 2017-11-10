@@ -25,8 +25,12 @@ export default {
 h1,
 h2 {
   font-weight: normal;
+  font-size: 30px;
 }
 .btn-group {
   margin: 20px 0;
+}
+.hello {
+  margin: 0 auto;
 }
 </style>

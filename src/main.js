@@ -32,5 +32,59 @@ new Vue({
   router,
   template: '<App/>',
   components: { App },
-  mounted() {}
+  mounted() {
+    let _this = this
+    this.$imConn.listen({
+      onOpened: function(message) {
+        console.log(message)
+      },
+      onClosed: function(message) {},
+      onTextMessage: function(message) {},
+      onEmojiMessage: function(message) {},
+      onPictureMessage: function(message) {},
+      onCmdMessage: function(message) {},
+      onAudioMessage: function(message) {},
+      onLocationMessage: function(message) {},
+      onFileMessage: function(message) {},
+      onVideoMessage: function(message) {
+        var node = document.getElementById('privateVideo')
+        var option = {
+          url: message.url,
+          headers: {
+            Accept: 'audio/mp4'
+          },
+          onFileDownloadComplete: function(response) {
+            var objectURL = WebIM.utils.parseDownloadResponse.call(
+              imConn,
+              response
+            )
+            node.src = objectURL
+          },
+          onFileDownloadError: function() {
+            console.log('File down load error.')
+          }
+        }
+        WebIM.utils.download.call(imConn, option)
+      },
+      onPresence: function(message) {},
+      onRoster: function(message) {},
+      onInviteMessage: function(message) {},
+      onOnline: function() {},
+      onOffline: function() {},
+      onError: function(message) {
+        let objStr = JSON.stringify(message)
+        console.log(objStr)
+        _this.$message({
+          message: message,
+          type: 'warning'
+        })
+      },
+      onBlacklistUpdate: function(list) {},
+      onReceivedMessage: function(message) {},
+      onDeliveredMessage: function(message) {},
+      onReadMessage: function(message) {},
+      onCreateGroup: function(message) {},
+      onMutedMessage: function(message) {}
+    })
+  }
 })

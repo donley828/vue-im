@@ -1,10 +1,6 @@
 <template>
   <el-container>
-    <el-main>
-      <div>
-        <router-view></router-view>
-      </div>
-    </el-main>
+    <router-view></router-view>
   </el-container>
 </template>
 
@@ -26,6 +22,7 @@ html {
 .el-container {
   height: 100%;
   background-image: url('./assets/14284041271_314bca5a9a_o-e1502649826956.jpg');
+  background-repeat: round;
   text-align: center;
   align-items: center;
 }
