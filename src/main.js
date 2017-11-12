@@ -73,9 +73,9 @@ new Vue({
       onOffline: function() {},
       onError: function(message) {
         let objStr = JSON.stringify(message)
-        console.log(objStr)
+        let arr = objStr.split('\\')
         _this.$message({
-          message: message,
+          message: arr[3],
           type: 'warning'
         })
       },
