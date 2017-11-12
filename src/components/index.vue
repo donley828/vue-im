@@ -12,7 +12,7 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane name="friendList">
             <span slot="label"><i class="fa fa-user"></i></span>
-            好友列表
+            <FriendList></FriendList>
           </el-tab-pane>
           <el-tab-pane name="groupList">
             <span slot="label"><i class="fa fa-users"></i></span>
@@ -35,6 +35,7 @@
   </div>
 </template>
 <script>
+import FriendList from './index/friend-lists'
 export default {
   data() {
     return {
@@ -46,6 +47,9 @@ export default {
     handleClick(tab, event) {
       console.log(tab, event)
     }
+  },
+  components: {
+    FriendList
   }
 }
 </script>
