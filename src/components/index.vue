@@ -12,7 +12,8 @@
         <el-tabs v-model="activeName" @tab-click="handleClick">
           <el-tab-pane name="friendList">
             <span slot="label"><i class="fa fa-user"></i></span>
-            <FriendList></FriendList>
+            <el-tree :data="friendList" @node-click="handleNodeClick">
+            </el-tree>
           </el-tab-pane>
           <el-tab-pane name="groupList">
             <span slot="label"><i class="fa fa-users"></i></span>
@@ -35,22 +36,59 @@
   </div>
 </template>
 <script>
-import FriendList from './index/friend-lists'
 export default {
   data() {
     return {
       proBtn: false,
-      activeName: 'friendList'
+      activeName: 'friendList',
+      isActive: false,
+      friendList: [
+        {
+          label: '大学同学',
+          children: [
+            {
+              label: '谢'
+            },
+            {
+              label: '谢'
+            }
+          ]
+        },
+        {
+          label: '大学同学',
+          children: [
+            {
+              label: '谢'
+            },
+            {
+              label: '谢'
+            }
+          ]
+        },
+        {
+          label: '大学同学',
+          children: [
+            {
+              label: '谢'
+            },
+            {
+              label: '谢'
+            }
+          ]
+        }
+      ]
     }
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event)
+    },
+    handleNodeClick(data) {
+      console.log(data)
     }
   },
-  components: {
-    FriendList
-  }
+  computed: {},
+  components: {}
 }
 </script>
 <style scoped>
@@ -69,7 +107,7 @@ export default {
   border-radius: 2px;
   /* border: 1px solid #d9d9d9; */
   border-color: rgba(0, 0, 0, 0.05);
-  background-color: #f6f6f6;
+  background-color: #ffffff;
   position: relative;
 }
 .main-panel-header {
