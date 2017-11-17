@@ -1,6 +1,6 @@
 # im
 
-> webim weith Huanxin sdk
+> webim with rongyun sdk
 
 ## Build Setup
 

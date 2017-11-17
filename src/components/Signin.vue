@@ -44,26 +44,7 @@ export default {
     }
   },
   methods: {
-    submitSignin(formName) {
-      let userID = formName.username
-      let _this = this
-      let options = {
-        apiUrl: this.$WebIM.config.apiURL,
-        user: formName.username,
-        pwd: formName.password,
-        appKey: this.$WebIM.config.appkey,
-        success(token) {
-          token = token.access_token
-          _this.$WebIM.utils.setCookie('webim_' + formName.username, token, 1)
-          _this.$message('登录成功！')
-          setTimeout(() => {
-            _this.$router.push({ path: `/index/${userID}` })
-          }, 1000)
-        },
-        error() {}
-      }
-      this.$imConn.open(options)
-    },
+    submitSignin(formName) {},
     resetForm(formName) {
       this.signinForm = ''
     }

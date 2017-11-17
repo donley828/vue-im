@@ -65,31 +65,7 @@ export default {
     }
   },
   methods: {
-    submitSignup(formName) {
-      let _this = this
-      let options = {
-        username: formName.username,
-        password: formName.password,
-        nickname: formName.nickname,
-        appKey: this.$WebIM.config.appkey,
-        success() {
-          _this.$message('注册成功！')
-          setTimeout(() => {
-            _this.$router.push('Signin')
-          }, 1000)
-        },
-        error(err) {
-          if (err.type === 17) {
-            _this.$message({
-              message: '用户名已存在',
-              type: 'warning'
-            })
-          }
-        },
-        apiUrl: this.$WebIM.config.apiURL
-      }
-      this.$imConn.registerUser(options)
-    },
+    submitSignup(formName) {},
     resetForm(formName) {
       this.userinfo = ''
     }
