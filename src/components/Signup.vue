@@ -1,29 +1,37 @@
 <template>
   <el-main>
     <h1>注册账号</h1>
-    <el-form ref="userinfo" :model="userinfo" status-icon :rules="ruleform" class="demo-ruleForm" label-width="80px">
-      <el-form-item label="用户名" prop="username" required>
-        <el-input v-model="userinfo.username" placeholder="请输入用户名"></el-input>
+    <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
+      <el-form-item label="用户名" prop="username">
+        <el-input v-model="ruleForm2.username"></el-input>
       </el-form-item>
-      <el-form-item label="昵称" prop="nickname">
-        <el-input v-model="userinfo.nickname" placeholder="昵称"></el-input>
+      <el-form-item label="昵称" prop="name">
+        <el-input v-model="ruleForm2.name"></el-input>
       </el-form-item>
-      <el-form-item label="密码" prop="password" required>
-        <el-input type="password" v-model="userinfo.password" auto-complete="off"></el-input>
+      <el-form-item label="密码" prop="pass">
+        <el-input type="password" v-model="ruleForm2.pass" auto-complete="off"></el-input>
       </el-form-item>
-      <el-form-item label="确认密码" prop="checkPassword" required>
-        <el-input type="password" v-model="userinfo.checkPassword" auto-complete="off"></el-input>
+      <el-form-item label="确认密码" prop="checkPass">
+        <el-input type="password" v-model="ruleForm2.checkPass" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item>
-        <el-button type="primary" @click="submitSignup(userinfo)">提交</el-button>
-        <el-button type="" @click="resetForm(userinfo)">重置</el-button>
+        <el-button type="primary" @click="submitForm('ruleForm2')">提交</el-button>
+        <el-button @click="resetForm('ruleForm2')">重置</el-button>
       </el-form-item>
     </el-form>
+
   </el-main>
 </template>
 <script>
 export default {
   data() {
+    var checkName = (rule, value, callback) => {
+      if (!value) {
+        return callback(new Error('昵称不能为空'))
+      } else {
+        callback()
+      }
+    }
     var checkUsername = (rule, value, callback) => {
       if (!value) {
         return callback(new Error('用户名不能为空'))
@@ -35,8 +43,8 @@ export default {
       if (value === '') {
         callback(new Error('请输入密码'))
       } else {
-        if (this.userinfo.checkPassword !== '') {
-          this.$refs.ruleform.validatePass2('checkPassword')
+        if (this.ruleForm2.checkPass !== '') {
+          this.$refs.ruleForm2.validateField('checkPass')
         }
         callback()
       }
@@ -44,30 +52,69 @@ export default {
     var validatePass2 = (rule, value, callback) => {
       if (value === '') {
         callback(new Error('请再次输入密码'))
-      } else if (value !== this.userinfo.password) {
-        callback(new Error('两次输入密码不一致'))
+      } else if (value !== this.ruleForm2.pass) {
+        callback(new Error('两次输入密码不一致!'))
       } else {
         callback()
       }
     }
     return {
-      userinfo: {
+      ruleForm2: {
+        pass: '',
+        checkPass: '',
         username: '',
-        nickname: '',
-        password: '',
-        checkPassword: ''
+        name: ''
       },
-      ruleform: {
-        username: [{ validator: checkUsername, trigger: 'blur' }],
-        password: [{ validator: validatePass, trigger: 'blur' }],
-        checkPassword: [{ validator: validatePass2, trigger: 'blur' }]
+      rules2: {
+        pass: [{ validator: validatePass, trigger: 'blur', required: true }],
+        checkPass: [
+          { validator: validatePass2, trigger: 'blur', required: true }
+        ],
+        username: [
+          { validator: checkUsername, trigger: 'blur', required: true }
+        ],
+        name: [{ validator: checkName, trigger: 'blur', required: true }]
       }
     }
   },
   methods: {
-    submitSignup(formName) {},
+    submitForm(formName) {
+      let that = this
+      this.$refs[formName].validate(valid => {
+        if (valid) {
+          that.$http
+            .post('http://localhost:3100/signin', {
+              username: that.ruleForm2.username,
+              name: that.ruleForm2.name,
+              password: that.ruleForm2.pass
+            })
+            .then(response => {
+              switch (response.data.status) {
+                case 1:
+                  that.$message(response.data.msg)
+                  break
+                case 2:
+                  that.$message(response.data.msg)
+                  setTimeout(() => {
+                    that.$router.push('/Signin')
+                  }, 500)
+                  break
+                case 3:
+                  that.$message(response.data.msg)
+                  break
+              }
+            })
+            .catch(error => {
+              console.log(error)
+            })
+        } else {
+          console.log('error submit!!')
+          return false
+        }
+      })
+    },
     resetForm(formName) {
-      this.userinfo = ''
+      this.$refs[formName].resetFields()
     }
   }
 }
