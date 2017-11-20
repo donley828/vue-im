@@ -60,6 +60,11 @@ export default {
                   that.$message(response.data.msg)
                   break
                 case 1:
+                  console.log(response.data.data)
+                  that.ImConnect(
+                    response.data.data.token,
+                    that.ruleForm2.username
+                  )
                   that.$message(response.data.msg)
                   that.$router.push({
                     path: `/index/${that.ruleForm2.username}`
@@ -86,6 +91,39 @@ export default {
     },
     resetForm(formName) {
       this.$refs[formName].resetFields()
+    },
+    ImConnect(token, userId) {
+      let that = this
+      that.$RongIMLib.RongIMClient.init(that.$AppKey)
+      that.$RongIMClient.connect(token, {
+        onSuccess(userId) {
+          console.log('connect successfully.' + userId)
+        },
+        onTokenIncorrect() {
+          console.log('无效token')
+        },
+        onError(errorCode) {
+          let info = ''
+          switch (errorCode) {
+            case that.$RongIMLib.ErrorCode.TIMEOUT:
+              info = '超时'
+              break
+            case that.$RongIMLib.ErrorCode.UNKNOWN_ERROR:
+              info = '未知错误'
+              break
+            case that.$RongIMLib.ErrorCode.UNACCEPTABLE_PaROTOCOL_VERSION:
+              info = '不可接受的协议版本'
+              break
+            case that.$RongIMLib.ErrorCode.IDENTIFIER_REJECTED:
+              info = 'appkey不正确'
+              break
+            case that.$RongIMLib.ErrorCode.SERVER_UNAVAILABLE:
+              info = '服务器不可用'
+              break
+          }
+          console.log(errorCode)
+        }
+      })
     }
   }
 }

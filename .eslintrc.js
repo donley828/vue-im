@@ -16,6 +16,7 @@ module.exports = {
   // add your custom rules here
   rules: {
     // allow paren-less arrow functions
+    'no-unused-vars': 1,
     'new-cap': 0,
     'space-before-function-paren': 0,
     'arrow-parens': 0,
