@@ -83,7 +83,7 @@ export default {
       this.$refs[formName].validate(valid => {
         if (valid) {
           that.$http
-            .post('http://localhost:3100/signin', {
+            .post('http://localhost:3100/signup', {
               username: that.ruleForm2.username,
               name: that.ruleForm2.name,
               password: that.ruleForm2.pass
@@ -102,6 +102,8 @@ export default {
                 case 3:
                   that.$message(response.data.msg)
                   break
+                default:
+                  that.$message('未知错误!')
               }
             })
             .catch(error => {
