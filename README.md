@@ -15,7 +15,11 @@ npm run dev
 # build for production with minification
 npm run build
 ```
-zhangshuai test pull request
+## TODO
+- [ ] friendlist and chat panel
+- [ ] User and Group information,friend relationship
+- [ ] Change the UI of index.vue to WeChat design
+- [ ] Use Vuex
 
 
 
