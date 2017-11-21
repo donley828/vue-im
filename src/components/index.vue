@@ -1,159 +1,67 @@
 <template>
-  <div class="Profile">
-    <el-button type="primary" @click="proBtn = !proBtn" v-show="proBtn">个人资料</el-button>
-    <section class="main-panel" v-show="!proBtn">
-      <div class="main-panel-header">
-        <h3>{{ $route.params.username }}</h3>
-        <i class="el-icon-close" @click="proBtn = !proBtn" v-show="!proBtn"></i>
-        <h4>在深邃的编码世界里...</h4>
-        <input></input>
-      </div>
-      <div class="main-panel-list">
-        <el-tabs v-model="activeName" @tab-click="handleClick">
-          <el-tab-pane name="friendList">
-            <span slot="label"><i class="fa fa-user"></i></span>
-            <el-tree :data="friendList" @node-click="handleNodeClick">
-            </el-tree>
-          </el-tab-pane>
-          <el-tab-pane name="groupList">
-            <span slot="label"><i class="fa fa-users"></i></span>
-            我的群组
-          </el-tab-pane>
-          <el-tab-pane name="latelyList">
-            <span slot="label"><i class="fa fa-commenting"></i></span>
-            最近联系
-          </el-tab-pane>
-        </el-tabs>
-      </div>
-      <div class="main-panel-footer">
-        <span><i class="el-icon-search"></i></span>
-        <span><i class="fa fa-bell-o"></i></span>
-        <span><i class="fa fa-gears"></i></span>
-        <span><a href="https://github.com/donley828/vue-im" target="_blank"><i class="fa fa-thumbs-o-up"></i></a></span>
-        <span><i class="el-icon-question"></i></span>
-      </div>
-    </section>
-  </div>
+  <el-container>
+    <el-tabs :tab-position="tabPosition" v-model="activeName" @tab-click="handleClick">
+      <el-tab-pane label="个人资料" name="first">
+        <span slot="label"><i class="fa fa-vcard"></i></span>
+        <my-profile></my-profile>
+      </el-tab-pane>
+      <el-tab-pane label="好友列表" name="second">
+        <span slot="label"><i class="fa fa-user"></i></span>
+        <my-chat></my-chat>
+      </el-tab-pane>
+      <el-tab-pane label="群组" name="third">
+        <span slot="label"><i class="fa fa-users"></i></span>
+        <my-group></my-group>
+      </el-tab-pane>
+      <el-tab-pane label="添加好友" name="fourth">
+        <span slot="label"><i class="fa fa-user-plus"></i></span>
+        <my-add></my-add>
+      </el-tab-pane>
+    </el-tabs>
+  </el-container>
 </template>
 <script>
+import MyProfile from './page/profile'
+import MyAdd from './page/add'
+import MyChat from './page/chat'
+import MyGroup from './page/group'
 export default {
   data() {
     return {
-      proBtn: false,
-      activeName: 'friendList',
-      isActive: false,
-      friendList: [
-        {
-          label: '大学同学',
-          children: [
-            {
-              label: '谢'
-            },
-            {
-              label: '谢'
-            }
-          ]
-        },
-        {
-          label: '大学同学',
-          children: [
-            {
-              label: '谢'
-            },
-            {
-              label: '谢'
-            }
-          ]
-        },
-        {
-          label: '大学同学',
-          children: [
-            {
-              label: '谢'
-            },
-            {
-              label: '谢'
-            }
-          ]
-        }
-      ]
+      tabPosition: 'left',
+      activeName: 'second'
     }
   },
   methods: {
     handleClick(tab, event) {
       console.log(tab, event)
-    },
-    handleNodeClick(data) {
-      console.log(data)
     }
   },
   computed: {},
-  components: {}
+  components: {
+    MyProfile,
+    MyAdd,
+    MyChat,
+    MyGroup
+  }
 }
 </script>
 <style scoped>
-.Profile {
-  position: fixed;
-  right: 10px;
-  height: 100%;
-  display: flex;
-  align-items: center;
-}
-
-.main-panel {
-  width: 260px;
-  height: 520px;
-  box-shadow: 1px 1px 50px rgba(0, 0, 0, 0.3);
-  border-radius: 2px;
-  /* border: 1px solid #d9d9d9; */
-  border-color: rgba(0, 0, 0, 0.05);
+.el-container {
+  height: 500px;
+  border: 1px solid #eee;
+  flex-grow: 0.4;
+  flex-basis: 500px;
+  background-image: none;
   background-color: #ffffff;
-  position: relative;
 }
-.main-panel-header {
-  padding: 5px;
-  overflow: auto;
-  background-color: #dfe1e3;
-}
-.main-panel-header > h3,
-h4 {
-  float: left;
-  font-weight: normal;
-}
-.main-panel-header > h4 {
-  margin-top: 10px;
-  margin-left: 10px;
-}
-.main-panel-header > i {
-  float: right;
-  cursor: pointer;
-}
-.main-panel-header > input {
-  width: 100%;
-  border: 0;
-  height: 20px;
-  margin: 10px 0 0 0;
-}
-.main-panel-list {
-  padding: 5px;
-  padding-left: 12px;
-}
-.main-panel-list i {
-  font-size: 30px;
-  padding: 0 10px;
-}
-.main-panel-footer {
-  position: absolute;
-  bottom: 0;
+.el-tabs {
+  height: 100%;
   width: 100%;
 }
-.main-panel-footer i {
-  font-size: 22px;
-  padding: 5px 10px;
-  cursor: pointer;
-}
-.main-panel-footer i:hover {
-  color: #409eff;
+.el-tabs i {
+  font-size: 20px;
+  padding: 20px 0;
 }
 </style>
 

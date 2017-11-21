@@ -25,6 +25,7 @@ html {
   background-repeat: round;
   text-align: center;
   align-items: center;
+  justify-content: center;
 }
 .el-main {
   margin: 0 auto;

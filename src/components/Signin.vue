@@ -3,7 +3,7 @@
     <h1>登录</h1>
     <el-form :model="ruleForm2" status-icon :rules="rules2" ref="ruleForm2" label-width="100px" class="demo-ruleForm">
       <el-form-item label="用户名" prop="username">
-        <el-input v-model="ruleForm2.username"></el-input>
+        <el-input v-model="ruleForm2.username" auto-complete="off"></el-input>
       </el-form-item>
       <el-form-item label="密码" prop="password">
         <el-input type="password" v-model="ruleForm2.password" auto-complete="off"></el-input>
@@ -95,6 +95,20 @@ export default {
     ImConnect(token, userId) {
       let that = this
       that.$RongIMLib.RongIMClient.init(that.$AppKey)
+      that.$RongIMClient.getInstance().hasRemoteUnreadMessages(token, {
+        onSuccess(hasMessage) {
+          if (hasMessage) {
+            console.log(hasMessage)
+          } else {
+            // 没有未读的消息
+            console.log('没有')
+          }
+        },
+        onError(err) {
+          // 错误处理...
+          console.log(err)
+        }
+      })
       that.$RongIMClient.connect(token, {
         onSuccess(userId) {
           console.log('connect successfully.' + userId)
