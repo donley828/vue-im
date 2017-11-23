@@ -1,10 +1,10 @@
 <template>
   <aside>
     <ul class="nav-side">
-      <li><i class="fa fa-user-o" @click="toggleTab('imuser')"></i></li>
-      <li><i class="fa fa-comment-o" @click="toggleTab('imchat')"></i></li>
-      <li><i class="fa fa-users" @click="toggleTab('imnotice')"></i></li>
-      <li><i class="fa fa-align-justify"></i></li>
+      <li :class="{ 'this': activeTab == 'ImUser' }" @click="toggleTab('ImUser', $event)"><i class="fa fa-user-o"></i></li>
+      <li :class="{ 'this': activeTab == 'ImChat' }" @click="toggleTab('ImChat', $event)"><i class="fa fa-comment-o"></i></li>
+      <li :class="{ 'this': activeTab == 'ImNotice' }" @click="toggleTab('ImNotice', $event)"><i class="fa fa-users"></i></li>
+      <li :class="{ 'this': activeTab == 'add' }" @click="addUser('add', $event)"><i class="fa fa-align-justify"></i></li>
     </ul>
   </aside>
 </template>
@@ -12,17 +12,27 @@
 export default {
   data() {
     return {
-      currentTab: 'chat'
+      currentTab: 'ImChat',
+      activeTab: 'ImChat'
     }
   },
-  components: {
-    ImUser,
-    ImChat,
-    ImNotice
-  },
   methods: {
-    toggleTab(tab) {
-      this.currentTab = tab
+    toggleTab(tab, event) {
+      if (event.currentTarget) {
+        this.currentTab = tab
+        this.activeTab = tab
+        this.$emit('thisTab', this.currentTab)
+      } else {
+        return false
+      }
+    },
+    add(wt, event) {
+      if (event.currentTarget) {
+        this.currentTab = wt
+        this.activeTab = wt
+      } else {
+        return false
+      }
     }
   }
 }
@@ -37,6 +47,7 @@ aside {
   height: 90px;
   line-height: 90px;
   cursor: pointer;
+  transition: all 0.3s;
 }
 .nav-side li:last-child {
   width: 90px;
@@ -48,6 +59,9 @@ aside {
   font-size: 30px;
 }
 .nav-side li:hover {
+  background-color: rgba(79, 84, 92, 0.6);
+}
+.nav-side li.this {
   background-color: rgba(79, 84, 92, 0.6);
 }
 </style>
