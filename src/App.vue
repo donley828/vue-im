@@ -23,7 +23,6 @@ html {
   height: 100%;
   background-image: url('./assets/14284041271_314bca5a9a_o-e1502649826956.jpg');
   background-repeat: round;
-  text-align: center;
   align-items: center;
   justify-content: center;
 }

@@ -48,6 +48,7 @@ aside {
   line-height: 90px;
   cursor: pointer;
   transition: all 0.3s;
+  text-align: center;
 }
 .nav-side li:last-child {
   width: 90px;

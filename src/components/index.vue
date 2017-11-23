@@ -2,7 +2,9 @@
   <div class="container">
     <side-bar class="side-bar" @thisTab="showThisTab"></side-bar>
     <section class="content">
-      <im-chat :is="currentTab"></im-chat>
+      <div class="tab-view">
+        <im-chat :is="currentTab"></im-chat>
+      </div>  
     </section>
   </div>
 </template>
@@ -44,6 +46,12 @@ export default {
 .side-bar,
 .content {
   float: left;
+  height: 100%;
+}
+.tab-view {
+  width: 290px;
+  height: 100%;
+  background-color: #2F3136;
 }
 </style>
 
