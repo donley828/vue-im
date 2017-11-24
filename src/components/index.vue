@@ -4,8 +4,9 @@
     <section class="content">
       <div class="tab-view">
         <im-chat :is="currentTab"></im-chat>
-      </div>  
+      </div>
     </section>
+    <router-view class="main-panel"></router-view>
   </div>
 </template>
 <script>
@@ -20,9 +21,6 @@ export default {
     }
   },
   methods: {
-    handleClick(tab, event) {
-      console.log(tab, event)
-    },
     showThisTab(data) {
       this.currentTab = data
     }
@@ -44,14 +42,15 @@ export default {
   background-color: #ffffff;
 }
 .side-bar,
-.content {
+.content,
+.main-panel {
   float: left;
   height: 100%;
 }
 .tab-view {
   width: 290px;
   height: 100%;
-  background-color: #2F3136;
+  background-color: #e6e5e5;
 }
 </style>
 

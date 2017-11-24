@@ -4,7 +4,9 @@ import Main from '@/components/Main'
 import Signin from '@/components/Signin'
 import Signup from '@/components/Signup'
 import index from '@/components/index'
-
+import MyNotification from '@/components/page/notification'
+// import MyChat from '@/components/page/chat'
+import FriendInfo from '@/components/page/friendinfo'
 Vue.use(Router)
 
 export default new Router({
@@ -27,7 +29,17 @@ export default new Router({
     {
       path: '/index/:username',
       name: 'index',
-      component: index
+      component: index,
+      children: [
+        {
+          path: 'notice',
+          component: MyNotification
+        },
+        {
+          path: 'friendinfo',
+          component: FriendInfo
+        }
+      ]
     }
   ]
 })

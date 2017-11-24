@@ -1,7 +1,7 @@
 <template>
   <div class="hello">
     <h1>{{ msg }}</h1>
-    <h2>This is a simle WebIM with Vue and HUANXIN SDK</h2>
+    <h2>This is a simle WebIM with Vue and RongCloud SDK</h2>
     <div class="btn-group">
       <router-link to="/Signin"><el-button type="primary">登录</el-button></router-link>
       <router-link to="/Signup"><el-button type="primary">注册</el-button></router-link>
@@ -26,9 +26,11 @@ h1,
 h2 {
   font-weight: normal;
   font-size: 30px;
+  text-align: center;
 }
 .btn-group {
   margin: 20px 0;
+  text-align: center;
 }
 .hello {
   margin: 0 auto;
