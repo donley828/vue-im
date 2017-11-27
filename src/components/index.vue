@@ -5,8 +5,11 @@
       <div class="tab-view">
         <im-chat :is="currentTab"></im-chat>
       </div>
+      <div class="main">
+        <router-view></router-view>
+      </div>
     </section>
-    <router-view class="main-panel"></router-view>
+    <!-- <router-view class="main-panel"></router-view> -->
   </div>
 </template>
 <script>
@@ -41,13 +44,18 @@ export default {
   background-image: none;
   background-color: #ffffff;
 }
-.side-bar,
-.content,
-.main-panel {
+.side-bar {
   float: left;
+}
+.content {
+  margin-left: 90px;
   height: 100%;
 }
+.main {
+  margin-left: 290px;
+}
 .tab-view {
+  float: left;
   width: 290px;
   height: 100%;
   background-color: #e6e5e5;
