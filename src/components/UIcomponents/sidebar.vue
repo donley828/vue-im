@@ -4,7 +4,7 @@
       <li :class="{ 'this': activeTab == 'ImUser' }" @click="toggleTab('ImUser', $event)"><i class="fa fa-user-o"></i></li>
       <li :class="{ 'this': activeTab == 'ImChat' }" @click="toggleTab('ImChat', $event)"><i class="fa fa-comment-o"></i></li>
       <li :class="{ 'this': activeTab == 'ImNotice' }" @click="toggleTab('ImNotice', $event)"><i class="fa fa-users"></i></li>
-      <li :class="{ 'this': activeTab == 'add' }" @click="addUser('add', $event)"><i class="fa fa-align-justify"></i></li>
+      <li :class="{ 'this': activeTab == 'add' }" @click="addUser('adduser')"><i class="fa fa-align-justify"></i></li>
     </ul>
   </aside>
 </template>
@@ -26,13 +26,9 @@ export default {
         return false
       }
     },
-    add(wt, event) {
-      if (event.currentTarget) {
-        this.currentTab = wt
-        this.activeTab = wt
-      } else {
-        return false
-      }
+    addUser(url) {
+      const username = this.$route.params.username
+      this.$router.push({ path: `/index/${username}/${url}` })
     }
   }
 }

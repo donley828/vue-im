@@ -7,6 +7,7 @@ import index from '@/components/index'
 import MyNotification from '@/components/page/notification'
 // import MyChat from '@/components/page/chat'
 import FriendInfo from '@/components/page/friendinfo'
+import MyAddUser from '@/components/page/adduser'
 Vue.use(Router)
 
 export default new Router({
@@ -38,6 +39,10 @@ export default new Router({
         {
           path: 'friendinfo',
           component: FriendInfo
+        },
+        {
+          path: 'adduser',
+          component: MyAddUser
         }
       ]
     }
