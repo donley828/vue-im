@@ -8,7 +8,7 @@
         <li v-for="(item, index) in friendLists">
           <img src="https://avatars1.githubusercontent.com/u/19424162?s=400&u=298843c1bade0f1b8fbfeb4222d60c9e769db4b6&v=4" alt="头像">
           <span>{{ item.username }}</span>
-          <el-button size="mini" type="primary" round>加为好友</el-button>
+          <el-button size="mini" type="primary" round @click="addUser(item.username)" :loading="btnIsLoading == item.username">加为好友</el-button>
         </li>
       </ul>
     </div>
@@ -20,7 +20,8 @@ export default {
     return {
       username: '',
       friendLists: [],
-      loading: false
+      loading: false,
+      btnIsLoading: ''
     }
   },
   methods: {
@@ -40,6 +41,25 @@ export default {
             that.loading = false
             let data = response.data.data
             for (let i = 0; i < data.length; i++) that.friendLists.push(data[i])
+          }, 1000)
+        })
+        .catch(error => {
+          console.log(error)
+        })
+    },
+    addUser(toName) {
+      let that = this
+      this.btnIsLoading = toName
+      this.$http
+        .post('http://localhost:3100/user/addUser', {
+          username: this.$route.params.username,
+          to: toName
+        })
+        .then(response => {
+          setTimeout(() => {
+            that.btnIsLoading = ''
+            console.log(response)
+            that.$message(response.data.msg)
           }, 1000)
         })
         .catch(error => {
