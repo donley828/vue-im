@@ -41,48 +41,61 @@ window.RongIMClient.setOnReceiveMessageListener({
     switch (message.messageType) {
       case window.RongIMClient.MessageType.TextMessage:
         // message.content.content => 消息内容
+        console.log(message)
         break
       case window.RongIMClient.MessageType.VoiceMessage:
         // 对声音进行预加载
         // message.content.content 格式为 AMR 格式的 base64 码
+        console.log(message)
         break
       case window.RongIMClient.MessageType.ImageMessage:
         // message.content.content => 图片缩略图 base64。
         // message.content.imageUri => 原图 URL。
+        console.log(message)
         break
       case window.RongIMClient.MessageType.DiscussionNotificationMessage:
         // message.content.extension => 讨论组中的人员。
+        console.log(message)
         break
       case window.RongIMClient.MessageType.LocationMessage:
         // message.content.latiude => 纬度。
         // message.content.longitude => 经度。
         // message.content.content => 位置图片 base64。
+        console.log(message)
         break
       case window.RongIMClient.MessageType.RichContentMessage:
         // message.content.content => 文本消息内容。
         // message.content.imageUri => 图片 base64。
         // message.content.url => 原图 URL。
+        console.log(message)
         break
       case window.RongIMClient.MessageType.InformationNotificationMessage:
         // do something...
+        console.log(message)
         break
       case window.RongIMClient.MessageType.ContactNotificationMessage:
         // do something...
+        console.log(message)
         break
       case window.RongIMClient.MessageType.ProfileNotificationMessage:
         // do something...
+        console.log(message)
         break
       case window.RongIMClient.MessageType.CommandNotificationMessage:
         // do something...
+        console.log(message)
         break
       case window.RongIMClient.MessageType.CommandMessage:
         // do something...
+        console.log(message)
         break
       case window.RongIMClient.MessageType.UnknownMessage:
         // do something...
+        console.log(message)
         break
       default:
-      // do something...
+        // do something...
+        console.log(message)
     }
   }
 })
