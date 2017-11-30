@@ -5,16 +5,12 @@ Vue.use(Vuex)
 
 export default new Vuex.Store({
   state: {
-    count: 0
+    SystemNotification: []
   },
   mutations: {
-    increment(state) {
-      state.count++
+    addNotice(state, messages) {
+      state.SystemNotification.push(messages)
     }
   },
-  actions: {
-    increment(context) {
-      context.commit('increment')
-    }
-  }
+  actions: {}
 })

@@ -16,13 +16,11 @@
 <script>
 export default {
   data() {
-    return {
-      MessageLists: [
-        {
-          name: 'fuyanduo',
-          message: '你好'
-        }
-      ]
+    return {}
+  },
+  computed: {
+    MessageLists() {
+      return this.$store.state.SystemNotification
     }
   },
   methods: {
