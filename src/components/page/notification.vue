@@ -8,7 +8,7 @@
           <span>{{ item.name }}<br>{{ item.message }}</span>
         </span>
         <span>请求添加你为好友</span>
-        <span><el-button size="mini" type="primary" round>同意</el-button></span>
+        <span><el-button size="mini" type="primary" round @click="test">同意</el-button></span>
       </li>
     </ul>
   </section>
@@ -28,6 +28,9 @@ export default {
   methods: {
     back() {
       this.$router.go(-1)
+    },
+    test() {
+      this.$store.commit('increment')
     }
   }
 }
@@ -62,7 +65,7 @@ h1 > i {
   vertical-align: top;
 }
 .message-lists li {
-  border-bottom: 1px solid #00A1FF;
+  border-bottom: 1px solid #00a1ff;
   display: flex;
   justify-content: space-between;
 }
