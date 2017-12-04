@@ -5,10 +5,10 @@
       <li v-for="item in MessageLists">
         <span>
           <img src="../../assets/logo.png" alt="LOGO">
-          <span>{{ item.name }}<br>{{ item.message }}</span>
+          <span>{{ item.targetId }}<br>请求添加你为好友</span>
         </span>
-        <span>请求添加你为好友</span>
-        <span><el-button size="mini" type="primary" round @click="test">同意</el-button></span>
+        <span>{{ item.content.content }}</span>
+        <span><el-button size="mini" type="primary" round @click="agree(item.targetId)">同意</el-button></span>
       </li>
     </ul>
   </section>
@@ -27,8 +27,8 @@ export default {
     back() {
       this.$router.go(-1)
     },
-    test() {
-      this.$store.commit('increment')
+    agree(from) {
+      console.log(from)
     }
   }
 }

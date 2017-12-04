@@ -39,7 +39,7 @@ export default {
           case that.$RongIMClient.MessageType.TextMessage:
             // message.content.content => 消息内容
             console.log(message)
-            that.$store.commit('addNotice', message.content)
+            that.$store.commit('addNotice', message)
             break
           case that.$RongIMClient.MessageType.VoiceMessage:
             // 对声音进行预加载
