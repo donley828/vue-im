@@ -8,7 +8,7 @@
           <span>{{ item.targetId }}<br>请求添加你为好友</span>
         </span>
         <span>{{ item.content.content }}</span>
-        <span><el-button size="mini" type="primary" round @click="agree(item.targetId)">同意</el-button></span>
+        <span><el-button size="mini" type="primary" round @click="agree(item.targetId)" :loading="loading">同意</el-button></span>
       </li>
     </ul>
   </section>
@@ -16,7 +16,9 @@
 <script>
 export default {
   data() {
-    return {}
+    return {
+      loading: false
+    }
   },
   computed: {
     MessageLists() {
@@ -28,7 +30,22 @@ export default {
       this.$router.go(-1)
     },
     agree(from) {
-      console.log(from)
+      let that = this
+      this.loading = true
+      this.$http
+        .post('http://localhost:3100/user/agreeUser', {
+          username: this.$route.params.username,
+          to: from
+        })
+        .then(response => {
+          setTimeout(() => {
+            that.loading = false
+            that.$message(response.data.msg)
+          }, 1000)
+        })
+        .catch(error => {
+          console.log(error)
+        })
     }
   }
 }
